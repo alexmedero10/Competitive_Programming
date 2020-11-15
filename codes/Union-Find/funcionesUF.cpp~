@@ -1,0 +1,17 @@
+int find(int a){
+  while(a != p[a])
+    a = p[a];
+  return a;
+}
+
+bool same(int a, int b){
+  return find(a) == find(b);
+}
+
+bool join(int a, int b){
+  int ra = find(a), rb = find(b);
+  if(ra == rb)
+    return false;
+  p[ra] = rb;
+  return true;
+}

@@ -1,0 +1,370 @@
+\documentclass[twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{minted}
+\usepackage{python}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{needspace}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{afterpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}
+\usepackage{fontspec}
+\usepackage{ulem}
+\usepackage[explicit]{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\geometry{letterpaper, portrait, left=0.5cm, right=0.5cm, top=1.8cm, bottom=1cm}
+\setminted{
+	style=tango,
+  breaklines=true,
+  breakanywhere=true
+}
+
+\setlength{\headsep}{0.5cm}
+\setlength{\columnsep}{0.5cm}
+\setlength{\columnseprule}{0.01cm}
+\renewcommand{\columnseprulecolor}{\color{gray}}
+
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LO,RE]{\textsf{First, solve the problem. Then, write the code.}}
+\fancyhead[LE,RO]{\textsf{\leftmark}}
+\fancyfoot[LE,RO]{\textbf{\textsf{\thepage}}}
+
+\renewcommand{\headrulewidth}{0.01cm}
+\renewcommand{\footrulewidth}{0.01cm}
+
+\setlength{\parindent}{0em}
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+
+\setmainfont{Montserrat}
+\setcounter{tocdepth}{5}
+
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\titleformat{\subsection}{\huge\bfseries\centering}{\thesubsection}{1em}{#1}
+\titleformat{\subsubsection}{\LARGE\bfseries\centering}{\thesubsubsection}{1em}{#1}
+\titleformat{\paragraph}{\Large\bfseries\centering}{\theparagraph}{1em}{#1}
+\titleformat{\subparagraph}{\large\bfseries\centering}{\thesubparagraph}{1em}{#1}
+\titleformat{\mkcprfile}{\normalsize\bfseries}{\themkcprfile}{1em}{\uline{#1}}
+
+\begin{document}
+\begin{multicols*}{2}
+	\tableofcontents
+\end{multicols*}
+\begin{multicols*}{2}
+\needspace{5\baselineskip}
+{
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\phantomsection
+\section*{Binary}
+\markboth{BINARY}{}
+\addcontentsline{toc}{section}{Binary}
+}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{Change size}
+\addcontentsline{toc}{subsection}{Change size}
+}
+\begin{minted}{cpp}
+char lowerCase(char c){
+  return c | '';
+}
+
+char upperCase(char c){
+  return c & '-';
+}
+
+char loupCase(char c){
+  return c ^ '';
+}
+
+\end{minted}
+
+\needspace{2\baselineskip}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{Count bits}
+\addcontentsline{toc}{subsection}{Count bits}
+}
+\begin{minted}{cpp}
+int c = 0;
+while(n){
+  c++;
+  n>>=1;
+}
+return c;
+
+int popCount(int n){
+  int c = 0;
+  while(n){
+    c++;
+    n&=n-1;
+  }                            }
+  return c;
+}
+
+__builtin_popcount(n);   //int
+__builtin_popcountl(n);  //long
+__builtin_popcountll(n); //long long
+
+\end{minted}
+
+\needspace{2\baselineskip}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{MSB}
+\addcontentsline{toc}{subsection}{MSB}
+}
+\begin{minted}{cpp}
+int msb(int n){
+  int c = 0;
+  while(n){
+    c++;
+    n>>=1;
+  }                              }
+  return 1<<(c-1);
+}
+
+int msb(int n){
+  return 1<<(sizeof(n)*8-__builtin_clz(n)-1);
+}
+
+\end{minted}
+
+\needspace{2\baselineskip}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{Operaciones}
+\addcontentsline{toc}{subsection}{Operaciones}
+}
+\begin{minted}{cpp}
+a^=b^=a^=b //Intercambio
+x<<p       //Multiplicacion
+x>>p       //Division
+~n&1       //Nùmero par
+n&1        //Nùmero impar
+n&(n-1)==0 //Potencia de 2
+n&(1<<i)   //i-esimo bit encendido
+
+\end{minted}
+
+\needspace{3\baselineskip}
+{
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{\uline{#1}}
+\phantomsection
+\section*{BFS}
+\markboth{BFS}{}
+\addcontentsline{toc}{section}{BFS}
+}
+\begin{minted}{cpp}
+bool bfs(vector<vector<int>> v, int target){
+  vvi visited(v.size(),vector<int>(v.size()));
+  int movx[4] = {1,-1,0,0};
+  int movy[4] = {0,0,1,-1};  
+  queue<pair<int,int>> q;
+
+  while(!q.empty()){
+    pair<int,int> p = q.top()
+    q.pop();
+    for(int i = 0; i < 4 ; ++i){
+      int x = p.first + movx[i];
+      int y = p.second + movy[i];
+      if(x>=0 and x<v.size() and y>=0 and y<v.size()){
+          if(visited[x][y] == 0){
+          if(v[x][y] == target)
+          return true;
+          else q.push(make_pair(x,y));
+          visited[x][y] = 1;
+        }
+      } 
+    }
+  }
+  return false;
+}
+
+\end{minted}
+
+\needspace{5\baselineskip}
+{
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\phantomsection
+\section*{Grafos}
+\markboth{GRAFOS}{}
+\addcontentsline{toc}{section}{Grafos}
+}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{Ciclos}
+\addcontentsline{toc}{subsection}{Ciclos}
+}
+\begin{minted}{cpp}
+//NO DIRIGIDO
+vector<bool> visitado;
+bool dfs(int u){
+  visitados[u] = true;
+  for(auto v: adj[u]){
+    if(visitados[v])
+      return true;
+    if(dfs(v)) return true;
+  }
+  return false; 
+}
+
+//DIRIGIDO
+vector<int> estado;
+bool dfs(int u){
+  estado[u] = 1;
+  for(auto v: adj[u]){
+    if(estado[v] == 2)
+      continue;
+    if(estado[v] == 1)
+    return true;
+    if(dfs(v)) return true;
+  }
+  estado[u] = 2;
+  return false;
+}
+
+\end{minted}
+
+\needspace{5\baselineskip}
+{
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\phantomsection
+\section*{Techniques}
+\markboth{TECHNIQUES}{}
+\addcontentsline{toc}{section}{Techniques}
+}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{Binary search}
+\addcontentsline{toc}{subsection}{Binary search}
+}
+\begin{minted}{cpp}
+int binarySearch(vector<int> v, int target){
+  int l = 0, r = vector.size()-1;
+  while(l<=r){
+    int m = l+(r-l)/2;
+    if(v[m] == target) return m;
+    else if(v[m] < target) l = l+1;
+    else r = r-1;
+  }
+  return -1;
+}
+
+int lowerBound(vector<int> &v, int target){
+  int l = 0, r = v.size()-1;
+  while(l<=r){
+    int m = l + (r-l)/2;
+    if(v[m] >= target) r = m - 1;
+    else if(v[m] < target) l = m + 1;
+  }
+  if(l >= v.size()) return -1;
+  else return l;
+}
+
+int upperBound(vector<int> &v, int target){
+  int l = 0, r = v.size()-1;
+  while(l<=r){
+    int m = l + (r-l)/2;
+    if(v[m] > target) r = m - 1;
+    else if(v[m] <= target) l = m + 1;
+  }
+  if(l >= v.size()) return -1;
+  else return l;
+}
+
+\end{minted}
+
+\needspace{5\baselineskip}
+{
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\phantomsection
+\section*{Union-Find}
+\markboth{UNION-FIND}{}
+\addcontentsline{toc}{section}{Union-Find}
+}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{funcionesUF}
+\addcontentsline{toc}{subsection}{funcionesUF}
+}
+\begin{minted}{cpp}
+int find(int a){
+  while(a != p[a])
+    a = p[a];
+  return a;
+}
+
+bool same(int a, int b){
+  return find(a) == find(b);
+}
+
+bool join(int a, int b){
+  int ra = find(a), rb = find(b);
+  if(ra == rb)
+    return false;
+  p[ra] = rb;
+  return true;
+}
+
+int find(int a){
+  return a == p[a] ? a : p[a] = find(p[a]);
+}
+
+int join(int a, int b){
+  int ra = find(a), rb = find(b);
+  if(ra == rb)
+    return false;
+  if(rank[ra] > rank[rb])
+    swap(ra, rb);
+  if(rank[ra] == rank[rb])
+    rank[rb]++;
+  p[ra] = rb;
+  return true;
+}
+
+\end{minted}
+
+\needspace{5\baselineskip}
+{
+\titleformat{\section}{\Huge\bfseries\centering}{\thesection}{1em}{#1}[\vspace{2em}]
+\phantomsection
+\section*{Sortings}
+\markboth{SORTINGS}{}
+\addcontentsline{toc}{section}{Sortings}
+}
+{
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{\uline{#1}}
+\phantomsection
+\subsection*{ejemplo}
+\addcontentsline{toc}{subsection}{ejemplo}
+}
+\begin{minted}{cpp}
+#include
+afafa
+
+\end{minted}
+
+\end{multicols*}
+
+\end{document}

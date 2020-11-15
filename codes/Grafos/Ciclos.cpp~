@@ -1,0 +1,26 @@
+//NO DIRIGIDO
+vector<bool> visitado;
+bool dfs(u){
+  visitados[u] = true;
+  for(auto v: u){
+    if(visitados[v])
+      return true;
+    if(dfs(v)) return true;
+  }
+  return false; 
+}
+
+//DIRIGIDO
+vector<int> estado;
+bool dfs(u){
+  estado[u] = 1;
+  for(auto v: u){
+    if(estado[v] == 2)
+      continue;
+    if(estado[v] == 1)
+    return true;
+    if(dfs(v)) return true;
+    estado[u] = 2;
+  }
+  return false;
+}
